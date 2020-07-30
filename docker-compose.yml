@@ -6,7 +6,7 @@ services:
       context: ./docker
       dockerfile: web.docker
     volumes:
-      - ./:/var/www
+      - ./application/:/var/www
     ports:
       - "127.0.0.1:80:80"
     links:
@@ -17,7 +17,7 @@ services:
       context: ./docker
       dockerfile: app.docker
     volumes:
-      - ./:/var/www
+      - ./application/:/var/www
     links:
       - database
       - redis
@@ -37,7 +37,6 @@ services:
       - "elasticsearch:elasticsearch"
     ports:
       - "127.0.0.1:5601:5601"
-
 
   database:
     image: mysql:5.7
