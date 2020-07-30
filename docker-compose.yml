@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./docker
+      dockerfile: web.docker
+    volumes:
+      - ./:/var/www
+    ports:
+      - "127.0.0.1:80:80"
+    links:
+      - app
+
+  app:
+    build:
+      context: ./docker
+      dockerfile: app.docker
+    volumes:
+      - ./:/var/www
+    links:
+      - database
+      - redis
+      - "elasticsearch:elasticsearch"
+
+  redis:
+    image: redis
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
+    environment:
+      - discovery.type=single-node
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.6.1
+    links:
+      - "elasticsearch:elasticsearch"
+    ports:
+      - "127.0.0.1:5601:5601"
+
+
+  database:
+    image: mysql:5.7
+    env_file:
+      - ./docker.env
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 127.0.0.1:8025:8025
+
