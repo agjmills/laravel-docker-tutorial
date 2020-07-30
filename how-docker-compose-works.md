@@ -25,6 +25,9 @@ isn't bound to a port on the host system.
 But, if you look at the `web` service, that has a port definition of `127.0.0.1:80:80`, which means that `127.0.0.1`, port `80`, is bound to port `80` inside the container.
 So we should be able to open our web browser and navigate to `http://127.0.0.1` and we will see the Laravel default screen.
 
+I have deliberately included `.env` witin the application directory so that you can see how to configure Laravel to connect
+to the various services.
+
 ## Service links
 
 Some of the services have a linked attribute - these are basically showing the dependencies between the services,
