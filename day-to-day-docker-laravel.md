@@ -1,6 +1,6 @@
 # Day to day development with Docker
 
-This section are just a few things I've picked up after having developed Laravel projects using docker-compose on a day-to-day basis.
+This section contains a few things I've picked up after having developed Laravel projects using docker-compose on a day-to-day basis. 
 
 ## Learn the difference between `docker-compose stop` and `docker-compose down`
 * `docker-compose down`: Stop and remove containers, networks, images, and volumes
@@ -35,3 +35,9 @@ Here are a few useful commands:
 * `docker-compose up -d --force-recreate` Recreate containers even if their configuration and image haven't changed.
 * `docker-compose up -d --force-recreate` Build images before starting containers.
     
+## XDebug
+When built, the app container image within this repository will have xdebug installed (if `WITH_XDEBUG=true` is defined within 
+the `app.build.args` attribute inside `docker-compose.yml`).
+
+By default, this will attempt to connect to `10.0.1.41` on port `9000`. You can change this by editing the `docker.env` file. Change the
+IP address defined here to your local IP address, and [setup your IDE to accept connections on port 9000](https://dev.to/oranges13/phpstorm-xdebug-alpine-on-docker-13ff#setting-up-phpstorm). 

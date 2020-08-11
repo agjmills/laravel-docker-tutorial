@@ -16,6 +16,11 @@ services:
     build:
       context: ./docker
       dockerfile: app.docker
+      args:
+        - WITH_XDEBUG=true
+    expose:
+      - 9000
+    env_file: docker.env
     volumes:
       - ./application/:/var/www
     links:
